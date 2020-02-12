@@ -180,7 +180,8 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	allowed_tools = list(
 		/obj/item/weapon/weldingtool = 100,
 		/obj/item/weapon/gun/energy/plasmacutter = 50,
-		/obj/item/psychic_power/psiblade/master = 100
+		/obj/item/psychic_power/psiblade/master = 100,
+		/obj/item/weapon/wrench = 35
 	)
 
 	min_duration = 50
@@ -278,8 +279,13 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 /decl/surgery_step/robotics/repair_burn
 	name = "Repair burns on prosthetic"
 	allowed_tools = list(
-		/obj/item/stack/cable_coil = 100
+		/obj/item/stack/cable_coil = 100,
+		/obj/item/weapon/wirecutters = 35
 	)
+
+	//This code is intended very much for cable coils, I'll need to work out how to make it stop failing that check, since wirecutters don't have a use limit
+	//Maybe cannibalise some of the code from the brute repair above, related to if(iswelder(tool)
+
 	min_duration = 50
 	max_duration = 60
 
@@ -346,9 +352,9 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 
 /decl/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	if(target.isSynthetic())
-		return SURGERY_SKILLS_ROBOTIC 
+		return SURGERY_SKILLS_ROBOTIC
 	else
-		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
